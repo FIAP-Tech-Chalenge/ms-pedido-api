@@ -13,16 +13,18 @@ import java.util.UUID;
 @Data
 @Getter
 @Setter
-public class Produto {
+public class ProdutoEntity {
     private final UUID uuid;
     private final Integer quantidade;
+    private final String nome;
     private Float valor;
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoria;
 
 
-    public Produto(UUID uuid, Integer quantidade, CategoriaEnum categoria) {
+    public ProdutoEntity(UUID uuid, String nome, Integer quantidade, CategoriaEnum categoria) {
         this.uuid = uuid;
+        this.nome = nome;
         this.quantidade = quantidade;
         this.categoria = categoria;
     }

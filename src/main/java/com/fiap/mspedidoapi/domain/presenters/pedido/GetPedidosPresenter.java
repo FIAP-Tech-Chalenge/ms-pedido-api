@@ -1,7 +1,7 @@
 package com.fiap.mspedidoapi.domain.presenters.pedido;
 
-import com.fiap.mspedidoapi.domain.entity.pedido.Pedido;
-import com.fiap.mspedidoapi.domain.entity.pedido.Produto;
+import com.fiap.mspedidoapi.domain.entity.pedido.PedidoEntity;
+import com.fiap.mspedidoapi.domain.entity.pedido.ProdutoEntity;
 import com.fiap.mspedidoapi.domain.generic.presenter.PresenterInterface;
 import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
 
@@ -18,20 +18,20 @@ public class GetPedidosPresenter implements PresenterInterface {
     }
 
     public Map<String, Object> toArray() {
-        List<Pedido> pedidos = this.buscaTodosPedidoOutput.getListPedidos();
+        List<PedidoEntity> pedidos = this.buscaTodosPedidoOutput.getListPedidos();
         Map<String, Object> map = new HashMap<>();
         List<Map<String, Object>> pedidosMapList = new ArrayList<>();
 
-        for (Pedido pedido : pedidos) {
+        for (PedidoEntity pedido : pedidos) {
             Map<String, Object> pedidoMap = new HashMap<>();
-            pedidoMap.put("uuid", pedido.getUuid().toString());
+            pedidoMap.put("uuid_pedido", pedido.getPedidoId().toString());
             pedidoMap.put("cliente_uuid", pedido.getClienteUuid().toString());
             pedidoMap.put("numero_pedido", pedido.getNumeroPedido());
             pedidoMap.put("status_pedido", pedido.getStatusPedido().toString());
             pedidoMap.put("status_pagamento", pedido.getStatusPagamento().toString());
 
             List<Map<String, Object>> produtosMapList = new ArrayList<>();
-            for (Produto produto : pedido.getProdutos()) {
+            for (ProdutoEntity produto : pedido.getProdutos()) {
                 Map<String, Object> produtoMap = new HashMap<>();
                 produtoMap.put("uuid", produto.getUuid().toString());
                 produtoMap.put("quantidade", produto.getQuantidade());

@@ -1,15 +1,16 @@
 package com.fiap.mspedidoapi.domain.useCase.pedido;
 
-import com.fiap.mspedidoapi.domain.entity.pedido.Pedido;
+import com.fiap.mspedidoapi.domain.entity.pedido.PedidoEntity;
+import com.fiap.mspedidoapi.domain.gateway.pedido.BuscaListaPedidoInterface;
 import com.fiap.mspedidoapi.domain.generic.output.OutputError;
 import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
 import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
 import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
-import com.fiap.mspedidoapi.domain.gateway.pedido.BuscaListaPedidoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+
 @RequiredArgsConstructor
 @Getter
 public class BuscaListaPedidosUseCase {
@@ -19,7 +20,7 @@ public class BuscaListaPedidosUseCase {
 
     public void execute() {
         try {
-            List<Pedido> listPedidos = buscaListaPedidoInterface.findListaPedidos();
+            List<PedidoEntity> listPedidos = buscaListaPedidoInterface.findListaPedidos();
 
             buscaProdutoOutput = new BuscaTodosPedidoOutput(
                     listPedidos,

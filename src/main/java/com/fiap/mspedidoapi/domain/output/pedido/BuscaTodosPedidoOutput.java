@@ -1,6 +1,6 @@
 package com.fiap.mspedidoapi.domain.output.pedido;
 
-import com.fiap.mspedidoapi.domain.entity.pedido.Pedido;
+import com.fiap.mspedidoapi.domain.entity.pedido.PedidoEntity;
 import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
 import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
 import lombok.Data;
@@ -15,10 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 public class BuscaTodosPedidoOutput implements OutputInterface {
-    private List<Pedido> listPedidos;
+    private List<PedidoEntity> listPedidos;
     private OutputStatus outputStatus;
 
-    public BuscaTodosPedidoOutput(List<Pedido> listPedidos, OutputStatus outputStatus) {
+    public BuscaTodosPedidoOutput(List<PedidoEntity> listPedidos, OutputStatus outputStatus) {
         this.listPedidos = listPedidos;
         this.outputStatus = outputStatus;
     }

@@ -13,42 +13,42 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class Pedido {
+public class PedidoEntity {
     private final UUID clienteUuid;
     private UUID pedidoId;
-    private UUID uuid;
-    private Long numeroPedido;
+    private String uuid;
+    private int numeroPedido;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
     @Enumerated(EnumType.STRING)
     private StatusPagamento statusPagamento;
-    private List<Produto> produtos;
+    private List<ProdutoEntity> produtos;
     private Float total;
 
-    public Pedido(UUID clienteUuid) {
+    public PedidoEntity(UUID clienteUuid) {
         this.clienteUuid = clienteUuid;
         this.produtos = new ArrayList<>();
     }
 
-    public Pedido(UUID pedidoId, UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
+    public PedidoEntity(UUID pedidoId, UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
         this.pedidoId = pedidoId;
         this.clienteUuid = clienteId;
         this.statusPedido = statusPedido;
         this.statusPagamento = statusPagamento;
         this.total = valorTotal;
     }
-
-    public void addProduto(Produto produto) {
+/*
+    public void addProduto(ProdutoEntity produto) {
         produtos.add(produto);
     }
 
     public float valorTotalDoPedido() {
         float total = (float) 0;
-        for (Produto produto : produtos) {
+        for (ProdutoEntity produto : produtos) {
             total += produto.getValor() * produto.getQuantidade();
         }
 
         return total;
-    }
+    }*/
 
 }
