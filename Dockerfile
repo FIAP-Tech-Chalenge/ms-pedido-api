@@ -20,7 +20,7 @@ LABEL version="1.0"
 LABEL description="FIAP - Tech Chalenger"
 LABEL name="MS Admin API"
 
-EXPOSE 8080
+EXPOSE 8090
 
 # Copie o JAR da primeira etapa
 COPY --from=build /workspace/target/ms-pedido-api-0.0.1-SNAPSHOT.jar app.jar
