@@ -7,6 +7,7 @@ import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
 import com.fiap.mspedidoapi.domain.presenters.pedido.GetPedidosPresenter;
 import com.fiap.mspedidoapi.domain.useCase.pedido.BuscaListaPedidosUseCase;
 import com.fiap.mspedidoapi.infra.adpter.repository.pedido.BuscarListaPedidoRepository;
+import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("cozinha/pedido")
 public class ListPedidosController {
+    private final PedidosMongoRepository pedidosMongoRepository;
 
     @GetMapping("/lista-pedido/")
     @Operation(tags = {"cozinha"})
     public ResponseEntity<Object> getAllListaPedidos() {
         //injetar repository do que consulta o MONGODB
-        BuscaListaPedidosUseCase useCase = new BuscaListaPedidosUseCase(new BuscarListaPedidoRepository());
+        BuscaListaPedidosUseCase useCase = new BuscaListaPedidosUseCase(new BuscarListaPedidoRepository(pedidosMongoRepository));
         useCase.execute();
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
 
