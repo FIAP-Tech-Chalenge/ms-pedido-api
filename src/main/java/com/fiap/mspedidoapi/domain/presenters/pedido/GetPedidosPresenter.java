@@ -24,16 +24,18 @@ public class GetPedidosPresenter implements PresenterInterface {
 
         for (PedidoEntity pedido : pedidos) {
             Map<String, Object> pedidoMap = new HashMap<>();
-            pedidoMap.put("uuid_pedido", pedido.getPedidoId().toString());
+            pedidoMap.put("pedido_uuid", pedido.getPedidoId().toString());
             pedidoMap.put("cliente_uuid", pedido.getClienteUuid().toString());
-            pedidoMap.put("numero_pedido", pedido.getNumeroPedido());
-            pedidoMap.put("status_pedido", pedido.getStatusPedido().toString());
-            pedidoMap.put("status_pagamento", pedido.getStatusPagamento().toString());
+            pedidoMap.put("status_pagamento", pedido.getNumeroPedido());
+            pedidoMap.put("numero_pedido", pedido.getStatusPedido().toString());
+            pedidoMap.put("pedido_categoria", pedido.getStatusPagamento().toString());
+            pedidoMap.put("pedido_quantidade", pedido.getStatusPagamento().toString());
 
             List<Map<String, Object>> produtosMapList = new ArrayList<>();
             for (ProdutoEntity produto : pedido.getProdutos()) {
                 Map<String, Object> produtoMap = new HashMap<>();
                 produtoMap.put("uuid", produto.getUuid().toString());
+                produtoMap.put("nome", produto.getNome());
                 produtoMap.put("quantidade", produto.getQuantidade());
                 produtoMap.put("valor", produto.getValor());
                 produtoMap.put("categoria", produto.getCategoria().toString());
