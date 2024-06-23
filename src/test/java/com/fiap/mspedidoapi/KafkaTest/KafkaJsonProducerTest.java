@@ -49,7 +49,7 @@ public class KafkaJsonProducerTest {
                 valueMap.put("pedido_uuid", UUID.randomUUID().toString());
                 valueMap.put("cliente_uuid", UUID.randomUUID().toString());
                 valueMap.put("status_pagamento", StatusPagamento.PAGO.toString());
-                valueMap.put("numero_pedido", "Descricao " + i);
+                valueMap.put("numero_pedido", i);
                 valueMap.put("total", 23423);
                 valueMap.put("produtos", objectMapper.writeValueAsString(produtosListProdutos));
 

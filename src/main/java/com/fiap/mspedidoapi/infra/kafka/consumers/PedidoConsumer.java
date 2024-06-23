@@ -44,17 +44,17 @@ public class PedidoConsumer {
                         JsonNode messageJson = objectMapper.readTree(record.value());
                         String uuidPedido = messageJson.get("pedido_uuid").asText();
                         String uuidCliente = messageJson.get("cliente_uuid").asText();
-                        String status_pagamento = messageJson.get("status_pagamento").asText();
-                        int numero_pedido = messageJson.get("numero_pedido").asInt();
+                        String statusPagamento = messageJson.get("status_pagamento").asText();
+                        int numeroPedido = messageJson.get("numero_pedido").asInt();
                         double total = messageJson.get("total").asDouble();
 
                         com.fiap.mspedidoapi.infra.collection.pedido.Pedido pedidoModel = new com.fiap.mspedidoapi.infra.collection.pedido.Pedido();
                         pedidoModel.setUuidPedido(UUID.fromString(uuidPedido));
                         pedidoModel.setClienteUuid(UUID.fromString(uuidCliente));
                         pedidoModel.setStatusPedido(StatusPedido.RECEBIDO);
-                        pedidoModel.setStatusPagamento(StatusPagamento.valueOf(status_pagamento));
+                        pedidoModel.setStatusPagamento(StatusPagamento.valueOf(statusPagamento));
                         pedidoModel.setTotal((float) total);
-                        pedidoModel.setNumeroPedido(numero_pedido);
+                        pedidoModel.setNumeroPedido(numeroPedido);
                         List<Produto> produtosList = new ArrayList<>();
                         Map<String, Object> deserializedMap = objectMapper.readValue(messageJson.toString(), new TypeReference<Map<String, Object>>() {
                         });
