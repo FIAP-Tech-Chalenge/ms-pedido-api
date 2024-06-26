@@ -20,7 +20,7 @@ public class PedidoProntoProducer extends KafkaSenderConfig implements PedidoPro
     public void send(PedidoProntoOutput pedidoProntoOutput) {
         try {
             ObjectNode jsonNode = objectMapper.createObjectNode();
-            jsonNode.put("pedido_uuid", pedidoProntoOutput.getEntrega().getUuidPedido().toString());
+            jsonNode.put("uuid_pedido", pedidoProntoOutput.getEntrega().getUuidPedido().toString());
             jsonNode.put("status_pedido", pedidoProntoOutput.getEntrega().getStatusPedido().toString());
             jsonNode.put("numero_pedido", pedidoProntoOutput.getEntrega().getNumeroPedido());
             String json = jsonNode.toString();
