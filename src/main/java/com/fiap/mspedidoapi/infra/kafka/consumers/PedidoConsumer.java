@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPagamento;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPedido;
 import com.fiap.mspedidoapi.infra.collection.pedido.items.Produto;
-import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.KafkaConsumerResolver;
+import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers.KafkaConsumerResolver;
 import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

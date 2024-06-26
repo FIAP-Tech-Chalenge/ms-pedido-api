@@ -1,4 +1,4 @@
-package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers;
+package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

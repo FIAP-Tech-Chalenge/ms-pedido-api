@@ -1,4 +1,4 @@
-package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers;
+package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers;
 
 import com.fiap.mspedidoapi.infra.dependecy.kafka.KafkaTopicsEnum;
 

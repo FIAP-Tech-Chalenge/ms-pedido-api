@@ -19,6 +19,9 @@ public class PedidoProntoRepository implements PedidoProntoInterface {
         Optional<Pedido> optionalPedido = pedidosMongoRepository.findByUuidPedido(uuidPedido);
         if (optionalPedido.isPresent()) {
             Pedido existingPedido = optionalPedido.get();
+            if (existingPedido.getStatusPedido().equals(StatusPedido.PRONTO)) {
+                return new Entrega(existingPedido.getUuidPedido(), existingPedido.getNumeroPedido(), existingPedido.getStatusPedido());
+            }
             existingPedido.setStatusPedido(StatusPedido.PRONTO);
             pedidosMongoRepository.save(existingPedido);
             return new Entrega(existingPedido.getUuidPedido(), existingPedido.getNumeroPedido(), existingPedido.getStatusPedido());
