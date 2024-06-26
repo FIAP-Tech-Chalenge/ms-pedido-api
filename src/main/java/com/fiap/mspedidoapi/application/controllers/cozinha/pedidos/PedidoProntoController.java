@@ -23,7 +23,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("cozinha/entrega")
-public class PedidoPontoController {
+public class PedidoProntoController {
     private final PedidosMongoRepository pedidosMongoRepository;
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String servers;
