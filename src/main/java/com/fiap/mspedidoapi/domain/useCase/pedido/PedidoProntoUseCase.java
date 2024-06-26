@@ -42,7 +42,10 @@ public class PedidoProntoUseCase {
                     new OutputStatus(500, "Internal Server Error", "Erro no servidor")
             );
         } finally {
-            if (this.pedidoProntoProducerInterface != null && this.outputInterface instanceof PedidoProntoOutput) {
+            if (this.pedidoProntoProducerInterface != null
+                && this.outputInterface instanceof PedidoProntoOutput &&
+                this.outputInterface.getOutputStatus().getCode() == 200
+            ) {
                 this.pedidoProntoProducerInterface.send((PedidoProntoOutput) outputInterface);
             }
         }
