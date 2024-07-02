@@ -11,8 +11,14 @@ import java.util.Map;
 public class HttpAdapter implements HttpAdapterInterface {
     private final HttpClient httpClient;
 
+    // Construtor padrão
     public HttpAdapter() {
         this.httpClient = HttpClient.newHttpClient();
+    }
+
+    // Construtor para injeção de dependência
+    public HttpAdapter(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     public String get(String url, Map<String, String> headers) throws Exception {
@@ -56,3 +62,4 @@ public class HttpAdapter implements HttpAdapterInterface {
         }
     }
 }
+

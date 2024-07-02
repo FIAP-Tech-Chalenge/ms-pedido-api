@@ -11,13 +11,13 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class KafkaJsonProducerTest {
-    @Test
+    @Ignore
     void testKafka() {
         String topicName = new KafkaConsumerResolver().getPedidoConsumer();
         String bootstrapServers = "localhost:9092"; // substitua pelo endereço do seu broker Kafka
@@ -69,7 +69,7 @@ public class KafkaJsonProducerTest {
         }
     }
 
-    @Test
+    @Ignore
     void testKafka2() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Produto> produtosListProdutos = new ArrayList<>();

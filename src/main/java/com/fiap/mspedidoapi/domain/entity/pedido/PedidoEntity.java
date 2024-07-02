@@ -36,19 +36,18 @@ public class PedidoEntity {
         this.statusPedido = statusPedido;
         this.statusPagamento = statusPagamento;
         this.total = valorTotal;
+        this.produtos = new ArrayList<>();
     }
-/*
+
     public void addProduto(ProdutoEntity produto) {
         produtos.add(produto);
     }
 
     public float valorTotalDoPedido() {
-        float total = (float) 0;
+        float total = 0;
         for (ProdutoEntity produto : produtos) {
             total += produto.getValor() * produto.getQuantidade();
         }
-
         return total;
-    }*/
-
+    }
 }

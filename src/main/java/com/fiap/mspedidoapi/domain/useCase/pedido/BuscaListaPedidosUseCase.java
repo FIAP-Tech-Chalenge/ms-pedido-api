@@ -22,6 +22,10 @@ public class BuscaListaPedidosUseCase {
         try {
             List<PedidoEntity> listPedidos = buscaListaPedidoInterface.findListaPedidos();
 
+            if (listPedidos == null) {
+                throw new NullPointerException("Lista de pedidos é nula");
+            }
+
             buscaProdutoOutput = new BuscaTodosPedidoOutput(
                     listPedidos,
                     new OutputStatus(200, "OK", "Lista de pedidos")

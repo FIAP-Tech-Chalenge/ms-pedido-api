@@ -31,4 +31,7 @@ public class Produto {
         this.categoria = categoria;
         this.quantidade = quantidade;
     }
+
+    public Produto(UUID uuid, int i, CategoriaEnum categoriaEnum) {
+    }
 }
