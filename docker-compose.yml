@@ -13,8 +13,7 @@ services:
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongo:my-secret-pw@mongodb:27017/pedidos?authSource=admin
       SPRING_PROFILES_ACTIVE: hom
-    networks:
-      - fiap-ms-pedidos
+
   mongodb:
     image: mongo:latest
     container_name: mongodb_pedidos
@@ -27,9 +26,7 @@ services:
     volumes:
       - mongodb_data:/data/db/
       - /etc/timezone:/etc/timezone:ro
-    networks:
-      - fiap-ms-pedidos
-      - kafka-network
+
 
   mongo-express:
     image: mongo-express:latest
@@ -43,9 +40,6 @@ services:
       - "8070:8081"
     depends_on:
       - mongodb
-    networks:
-      - fiap-ms-pedidos
-      - kafka-network
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -57,9 +51,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
-    networks:
-      - kafka-network
-      - fiap-ms-pedidos
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -69,14 +60,6 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - kafka-network
-      - fiap-ms-pedidos
 
-networks:
-  fiap-ms-pedidos:
-    driver: bridge
-  kafka-network:
-    external: true
 volumes:
     mongodb_data:
