@@ -1,5 +1,6 @@
 package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers;
 
+import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers.KafkaConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.junit.jupiter.api.Test;

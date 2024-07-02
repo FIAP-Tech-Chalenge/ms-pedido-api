@@ -1,5 +1,6 @@
 package com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers;
 
+import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers.KafkaConsumerResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
