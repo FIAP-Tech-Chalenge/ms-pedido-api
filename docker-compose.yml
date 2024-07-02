@@ -9,14 +9,12 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:my-secret-pw@mongo:27017/pedidos?authSource=admin
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:my-secret-pw@mongodb:27017/pedidos?authSource=admin
       SPRING_PROFILES_ACTIVE: hom
     networks:
-      - ms-pedidos
-
+      - fiap-ms-pedidos
   mongodb:
     image: mongo:latest
     container_name: mongodb_pedidos
@@ -27,15 +25,11 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./db_data/:/data/db/
+      - mongodb_data:/data/db/
       - /etc/timezone:/etc/timezone:ro
     networks:
-      - ms-pedidos
-    healthcheck:
-      test: "exit 0"  # Coloque um comando adequado para checar a saúde do MongoDB
-      interval: 10s
-      timeout: 10s
-      retries: 5
+      - fiap-ms-pedidos
+      - kafka-network
 
   mongo-express:
     image: mongo-express:latest
@@ -48,10 +42,10 @@ services:
     ports:
       - "8070:8081"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
     networks:
-      - ms-pedidos
+      - fiap-ms-pedidos
+      - kafka-network
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -64,7 +58,8 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - ms-pedidos
+      - kafka-network
+      - fiap-ms-pedidos
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -75,8 +70,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - ms-pedidos
+      - kafka-network
+      - fiap-ms-pedidos
 
 networks:
-  ms-pedidos:
+  fiap-ms-pedidos:
     driver: bridge
+  kafka-network:
+    external: true
+volumes:
+    mongodb_data:
