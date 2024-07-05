@@ -15,17 +15,16 @@ import java.util.List;
 public class BuscarListaPedidoRepository implements BuscaListaPedidoInterface {
     public final PedidosMongoRepository pedidosMongoRepository;
 
-    private static List<ProdutoEntity> getProdutoEntities(Pedido pedidoCollection) {
-        List<Produto> pedidosDoProduto = pedidoCollection.getProdutos();
+    private static List<ProdutoEntity> getProdutoEntities(List<Produto>  produtosDoPedido) {
         List<ProdutoEntity> produtosList = new ArrayList<>();
-        for (Produto pedidoProdutoCollection : pedidosDoProduto) {
+        for (Produto produto : produtosDoPedido) {
             ProdutoEntity produtoEntity = new ProdutoEntity(
-                    pedidoProdutoCollection.getUuid(),
-                    pedidoProdutoCollection.getNome(),
-                    pedidoProdutoCollection.getQuantidade(),
-                    pedidoProdutoCollection.getCategoria()
+                    produto.getUuid(),
+                    produto.getNome(),
+                    produto.getQuantidade(),
+                    produto.getCategoria()
             );
-            produtoEntity.setValor(pedidoProdutoCollection.getValor());
+            produtoEntity.setValor(produto.getValor());
             produtosList.add(produtoEntity);
         }
         return produtosList;
@@ -44,13 +43,11 @@ public class BuscarListaPedidoRepository implements BuscaListaPedidoInterface {
                     pedidoCollection.getStatusPagamento(),
                     pedidoCollection.getTotal()
             );
-            pedidoEntity.setPedidoId(pedidoCollection.getUuidPedido());
-            pedidoEntity.setUuid(pedidoCollection.getId());
-            pedidoEntity.setNumeroPedido(pedidoCollection.getNumeroPedido());
 
-            List<ProdutoEntity> produtosList = getProdutoEntities(pedidoCollection);
+            List<ProdutoEntity> produtosList = getProdutoEntities(pedidoCollection.getProdutos());
+
             pedidoEntity.setProdutos(produtosList);
-
+            pedidoEntity.setPedidoId(pedidoCollection.getUuidPedido());
             pedidoEntity.setNumeroPedido(pedidoCollection.getNumeroPedido());
             pedidosEntities.add(pedidoEntity);
         }

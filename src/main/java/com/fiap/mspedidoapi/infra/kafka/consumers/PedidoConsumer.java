@@ -59,8 +59,10 @@ public class PedidoConsumer {
                         Map<String, Object> deserializedMap = objectMapper.readValue(messageJson.toString(), new TypeReference<Map<String, Object>>() {
                         });
                         String produtosJsonString = (String) deserializedMap.get("produtos");
-                        List<Object> deserializedProdutosList = objectMapper.readValue(produtosJsonString, new TypeReference<List<Object>>() {
-                        });
+                        List<Object> deserializedProdutosList = objectMapper.readValue(
+                                produtosJsonString,
+                                new TypeReference<List<Object>>() {}
+                        );
 
                         for (Object produto : deserializedProdutosList) {
                             java.util.Map<?, ?> produtoMap = (java.util.Map<?, ?>) produto;
@@ -70,8 +72,7 @@ public class PedidoConsumer {
                                             (String) produtoMap.get("nome"),
                                             Float.parseFloat(produtoMap.get("valor").toString()),
                                             com.fiap.mspedidoapi.domain.enums.produto.CategoriaEnum.valueOf((String) produtoMap.get("categoria")),
-                                            (Integer) produtoMap.get("quantidade"
-                                            )
+                                            (Integer) produtoMap.get("quantidade")
                                     )
                             );
                         }
