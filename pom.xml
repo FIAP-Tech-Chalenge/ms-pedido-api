@@ -15,6 +15,7 @@
     <description>ms-pedido-api</description>
     <properties>
         <java.version>21</java.version>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <dependencies>
         <dependency>
