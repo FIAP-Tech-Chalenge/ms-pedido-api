@@ -90,9 +90,10 @@ public class GenericResponseTest {
 
         ResponseEntity<Object> response = genericResponse.response(outputInterface);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).isEqualTo("Bad Request Body");
     }
+
 
     @Test
     public void deveRetornarStatusInternalServerError() {

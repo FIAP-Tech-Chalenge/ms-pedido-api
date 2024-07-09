@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 public class DeletaProdutoOutput implements OutputInterface {
 
-    private final OutputStatus outputStatus;
-    private final ProdutoEntity produto;
+    private OutputStatus outputStatus;
+    private ProdutoEntity produto;
 
     public DeletaProdutoOutput(ProdutoEntity produtoEntity, OutputStatus outputStatus) {
         this.produto = produtoEntity;
@@ -27,4 +27,3 @@ public class DeletaProdutoOutput implements OutputInterface {
         return this.produto;
     }
 }
-

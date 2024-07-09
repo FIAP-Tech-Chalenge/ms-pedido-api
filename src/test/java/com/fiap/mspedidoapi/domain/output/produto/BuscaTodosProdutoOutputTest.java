@@ -53,4 +53,115 @@ public class BuscaTodosProdutoOutputTest {
 
         assertThat(buscaTodosProdutoOutput.getOutputStatus()).isEqualTo(novoOutputStatus);
     }
+
+    @Test
+    public void equalsDeveSerReflexivo() {
+        assertThat(buscaTodosProdutoOutput).isEqualTo(buscaTodosProdutoOutput);
+    }
+
+    @Test
+    public void equalsDeveSerSimetrico() {
+        BuscaTodosProdutoOutput output1 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        BuscaTodosProdutoOutput output2 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        assertThat(output1).isEqualTo(output2);
+        assertThat(output2).isEqualTo(output1);
+    }
+
+    @Test
+    public void equalsDeveSerTransitivo() {
+        BuscaTodosProdutoOutput output1 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        BuscaTodosProdutoOutput output2 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        BuscaTodosProdutoOutput output3 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        assertThat(output1).isEqualTo(output2);
+        assertThat(output2).isEqualTo(output3);
+        assertThat(output1).isEqualTo(output3);
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaNulo() {
+        assertThat(buscaTodosProdutoOutput.equals(null)).isFalse();
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaClasseDiferente() {
+        assertThat(buscaTodosProdutoOutput.equals(new Object())).isFalse();
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaListProdutosDiferentes() {
+        List<Produto> produtosDiferentes = List.of(new Produto("Produto 3", 100.0f, "Descrição do Produto 3", CategoriaEnum.SOBREMESA, 15));
+        BuscaTodosProdutoOutput outputDiferente = new BuscaTodosProdutoOutput(produtosDiferentes, outputStatus);
+        assertThat(buscaTodosProdutoOutput).isNotEqualTo(outputDiferente);
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaOutputStatusDiferente() {
+        OutputStatus statusDiferente = new OutputStatus(500, "ERROR", "Erro ao realizar a operação");
+        BuscaTodosProdutoOutput outputDiferente = new BuscaTodosProdutoOutput(produtos, statusDiferente);
+        assertThat(buscaTodosProdutoOutput).isNotEqualTo(outputDiferente);
+    }
+
+    @Test
+    public void hashCodeDeveSerConsistente() {
+        int hashCode1 = buscaTodosProdutoOutput.hashCode();
+        int hashCode2 = buscaTodosProdutoOutput.hashCode();
+        assertThat(hashCode1).isEqualTo(hashCode2);
+    }
+
+    @Test
+    public void hashCodeDeveSerIgualParaObjetosIguais() {
+        BuscaTodosProdutoOutput output1 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        BuscaTodosProdutoOutput output2 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        assertThat(output1.hashCode()).isEqualTo(output2.hashCode());
+    }
+
+    @Test
+    public void hashCodeDeveSerDiferenteParaObjetosDiferentes() {
+        List<Produto> produtosDiferentes = List.of(new Produto("Produto 3", 100.0f, "Descrição do Produto 3", CategoriaEnum.SOBREMESA, 15));
+        BuscaTodosProdutoOutput outputDiferente = new BuscaTodosProdutoOutput(produtosDiferentes, outputStatus);
+        assertThat(buscaTodosProdutoOutput.hashCode()).isNotEqualTo(outputDiferente.hashCode());
+    }
+
+    @Test
+    public void deveTerToStringCorreto() {
+        String expectedToString = "BuscaTodosProdutoOutput(listProdutos=" + produtos + ", outputStatus=OutputStatus{code=200, codeName='SUCCESS', message='Operação realizada com sucesso'})";
+        assertThat(buscaTodosProdutoOutput.toString()).isEqualTo(expectedToString);
+    }
+
+    @Test
+    public void canEqualDeveRetornarTrueParaMesmoTipo() {
+        BuscaTodosProdutoOutput output1 = new BuscaTodosProdutoOutput(produtos, outputStatus);
+        assertThat(buscaTodosProdutoOutput.canEqual(output1)).isTrue();
+    }
+
+    @Test
+    public void canEqualDeveRetornarFalseParaTipoDiferente() {
+        assertThat(buscaTodosProdutoOutput.canEqual(new Object())).isFalse();
+    }
+
+    @Test
+    public void deveInicializarComConstrutorSemArgumentos() {
+        BuscaTodosProdutoOutput output = new BuscaTodosProdutoOutput();
+        assertThat(output.getListProdutos()).isNull();
+        assertThat(output.getOutputStatus()).isNull();
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaOutputComListProdutosNulo() {
+        BuscaTodosProdutoOutput outputComListProdutosNulo = new BuscaTodosProdutoOutput(null, outputStatus);
+        assertThat(buscaTodosProdutoOutput).isNotEqualTo(outputComListProdutosNulo);
+    }
+
+    @Test
+    public void equalsDeveRetornarFalseParaOutputComOutputStatusNulo() {
+        BuscaTodosProdutoOutput outputComOutputStatusNulo = new BuscaTodosProdutoOutput(produtos, null);
+        assertThat(buscaTodosProdutoOutput).isNotEqualTo(outputComOutputStatusNulo);
+    }
+
+    @Test
+    public void equalsDeveRetornarTrueParaObjetosComListProdutosENuloOutputStatusNulo() {
+        BuscaTodosProdutoOutput output1 = new BuscaTodosProdutoOutput(null, null);
+        BuscaTodosProdutoOutput output2 = new BuscaTodosProdutoOutput(null, null);
+        assertThat(output1).isEqualTo(output2);
+    }
 }

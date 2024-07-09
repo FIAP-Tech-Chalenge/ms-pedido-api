@@ -27,7 +27,7 @@ public class GenericResponse {
         }
 
         if (outputInterface.getOutputStatus().getCode() == 400) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(outputInterface.getBody());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(outputInterface.getBody());
         }
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(outputInterface.getBody());
