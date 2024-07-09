@@ -15,7 +15,8 @@
     <description>ms-pedido-api</description>
     <properties>
         <java.version>21</java.version>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.organization>fiap-tech-chalenge</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
