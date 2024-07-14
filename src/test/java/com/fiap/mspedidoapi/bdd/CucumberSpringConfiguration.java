@@ -1,9 +1,10 @@
-package com.fiap.mspedidoapi.config;
+package com.fiap.mspedidoapi.bdd;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import com.fiap.mspedidoapi.MsPedidoApiApplication;
 
 @CucumberContextConfiguration
-@SpringBootTest
+@SpringBootTest(classes = MsPedidoApiApplication.class)
 public class CucumberSpringConfiguration {
 }

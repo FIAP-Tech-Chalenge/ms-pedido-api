@@ -5,9 +5,12 @@ import com.fiap.mspedidoapi.infra.collection.pedido.items.Produto;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.spring.CucumberContextConfiguration;
+
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@CucumberContextConfiguration
 public class ProdutoSteps {
 
     private Produto produto;

@@ -1,5 +1,6 @@
 package com.fiap.mspedidoapi.bdd.steps;
 
+import com.fiap.mspedidoapi.bdd.CucumberSpringConfiguration;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPagamento;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPedido;
 import com.fiap.mspedidoapi.domain.enums.produto.CategoriaEnum;
@@ -9,6 +10,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.test.context.ContextConfiguration;
+
 import java.util.List;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
