@@ -108,6 +108,29 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
+      - name: Read current version
+        id: get_version
+        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
+      - name: Increment patch version
+        id: increment_version
+        run: |
+          VERSION=${{ env.VERSION }}
+          IFS='.' read -ra ADDR <<< "$VERSION"
+          PATCH=$((ADDR[2] + 1))
+          NEW_VERSION="${ADDR[0]}.${ADDR[1]}.$PATCH"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo $NEW_VERSION > version.txt
+        shell: bash
+
+      - name: Commit new version
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add version.txt
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
+          git push
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -115,4 +138,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            wolwer/ms-pedido-api:${{ github.run_number }}
+            wolwer/ms-pedido-api:${{ env.NEW_VERSION }}
