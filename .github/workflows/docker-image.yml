@@ -124,12 +124,14 @@ jobs:
         shell: bash
 
       - name: Commit new version
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add version.txt
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git push
+          git push "https://${{ secrets.PAT_TOKEN }}@github.com/FIAP-Tech-Chalenge/ms-pedido-api.git" HEAD:main
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
