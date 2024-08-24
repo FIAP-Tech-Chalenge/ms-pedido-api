@@ -129,9 +129,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/FIAP-Tech-Chalenge/ms-pedido-api.git
           git add version.txt
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git push "https://${{ secrets.PAT_TOKEN }}@github.com/FIAP-Tech-Chalenge/ms-pedido-api.git" HEAD:main
+          git push origin HEAD:main
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
