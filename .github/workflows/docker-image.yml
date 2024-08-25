@@ -123,17 +123,6 @@ jobs:
           echo $NEW_VERSION > version.txt
         shell: bash
 
-      - name: Commit new version
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/FIAP-Tech-Chalenge/ms-pedido-api.git
-          git add version.txt
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git push origin HEAD:main
-
       - name: Debugging Information
         run: |
           git remote -v
