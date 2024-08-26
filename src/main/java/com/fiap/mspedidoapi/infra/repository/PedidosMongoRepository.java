@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface PedidosMongoRepository extends MongoRepository<Pedido, String> {
     Optional<Pedido> findByUuidPedido(UUID uuidPedido);
+    Pedido movePedidoParaEmPreparacao(UUID uuidPedido, Integer tempoDePreparoEmMinutos);
 }

@@ -23,6 +23,7 @@ public class PedidoEntity {
     @Enumerated(EnumType.STRING)
     private StatusPagamento statusPagamento;
     private List<ProdutoEntity> produtos;
+    private Integer tempoDePreparoEmMinutos;
     private Float total;
 
     public PedidoEntity(UUID clienteUuid) {
@@ -30,12 +31,13 @@ public class PedidoEntity {
         this.produtos = new ArrayList<>();
     }
 
-    public PedidoEntity(UUID pedidoId, UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
+    public PedidoEntity(UUID pedidoId, UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Integer tempoDePreparoEmMinutos, Float valorTotal) {
         this.pedidoId = pedidoId;
         this.clienteUuid = clienteId;
         this.statusPedido = statusPedido;
         this.statusPagamento = statusPagamento;
         this.total = valorTotal;
+        this.tempoDePreparoEmMinutos = tempoDePreparoEmMinutos;
         this.produtos = new ArrayList<>();
     }
 
