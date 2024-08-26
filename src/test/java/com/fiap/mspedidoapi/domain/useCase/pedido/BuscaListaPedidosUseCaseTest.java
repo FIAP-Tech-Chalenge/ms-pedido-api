@@ -4,7 +4,6 @@ import com.fiap.mspedidoapi.domain.entity.pedido.PedidoEntity;
 import com.fiap.mspedidoapi.domain.gateway.pedido.BuscaListaPedidoInterface;
 import com.fiap.mspedidoapi.domain.generic.output.OutputError;
 import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
-import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
 import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +29,8 @@ public class BuscaListaPedidosUseCaseTest {
 
     @Test
     public void deveExecutarBuscaListaPedidosComSucesso() {
-        PedidoEntity pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 100.0f);
-        PedidoEntity pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 200.0f);
+        PedidoEntity pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null,20, 100.0f);
+        PedidoEntity pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null,20, 200.0f);
         List<PedidoEntity> pedidos = List.of(pedido1, pedido2);
 
         when(buscaListaPedidoInterface.findListaPedidos()).thenReturn(pedidos);
