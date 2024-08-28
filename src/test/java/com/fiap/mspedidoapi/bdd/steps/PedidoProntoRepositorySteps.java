@@ -2,9 +2,9 @@ package com.fiap.mspedidoapi.bdd.steps;
 
 import com.fiap.mspedidoapi.domain.entity.entrega.Entrega;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPedido;
+import com.fiap.mspedidoapi.infra.adpter.repository.pedido.PedidoProntoRepository;
 import com.fiap.mspedidoapi.infra.collection.pedido.Pedido;
 import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
-import com.fiap.mspedidoapi.infra.adpter.repository.pedido.PedidoProntoRepository;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,7 +17,9 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class PedidoProntoRepositorySteps {
 

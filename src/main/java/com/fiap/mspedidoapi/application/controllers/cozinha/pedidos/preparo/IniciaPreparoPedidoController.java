@@ -7,7 +7,7 @@ import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
 import com.fiap.mspedidoapi.domain.output.pedido.PedidoProntoOutput;
 import com.fiap.mspedidoapi.domain.presenters.pedido.PedidoProntoPresenter;
 import com.fiap.mspedidoapi.domain.useCase.pedido.IniciaPreparoPedidoUseCase;
-import com.fiap.mspedidoapi.infra.adpter.repository.pedido.BuscarListaPedidoRepository;
+import com.fiap.mspedidoapi.infra.adpter.repository.pedido.PreparaPedidoRepository;
 import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class IniciaPreparoPedidoController {
     @PostMapping("/inicia-preparo")
     @Operation(tags = {"cozinha"})
     public ResponseEntity<Object> iniciaPreparoPedido(@RequestBody StoreIniciaPreparoProdutoRequest iniciaPreparoProdutoRequest) {
-        IniciaPreparoPedidoUseCase useCase = new IniciaPreparoPedidoUseCase(new BuscarListaPedidoRepository(pedidosMongoRepository));
+        IniciaPreparoPedidoUseCase useCase = new IniciaPreparoPedidoUseCase(new PreparaPedidoRepository(pedidosMongoRepository));
         useCase.execute(iniciaPreparoProdutoRequest.uuid(), iniciaPreparoProdutoRequest.tempoDePreparo());
         OutputInterface outputInterface = useCase.getOutputInterface();
 
