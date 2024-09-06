@@ -5,8 +5,8 @@ import com.fiap.mspedidoapi.domain.entity.pedido.ProdutoEntity;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPagamento;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPedido;
 import com.fiap.mspedidoapi.domain.enums.produto.CategoriaEnum;
-import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
 import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
+import com.fiap.mspedidoapi.domain.output.pedido.BuscaTodosPedidoOutput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,12 +32,12 @@ public class GetPedidosPresenterTest {
         produto2 = new ProdutoEntity(UUID.randomUUID(), "Produto 2", 1, CategoriaEnum.BEBIDA);
         produto2.setValor(15.0f);
 
-        pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), StatusPedido.RECEBIDO, StatusPagamento.PAGO, 35.0f);
+        pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), StatusPedido.RECEBIDO, StatusPagamento.PAGO,20, 35.0f);
         pedido1.setNumeroPedido(12345);
         pedido1.getProdutos().add(produto1);
         pedido1.getProdutos().add(produto2);
 
-        pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), StatusPedido.EM_PREPARACAO, StatusPagamento.AGUARDANDO_PAGAMENTO, 50.0f);
+        pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), StatusPedido.EM_PREPARACAO, StatusPagamento.AGUARDANDO_PAGAMENTO,20, 50.0f);
         pedido2.setNumeroPedido(67890);
 
         List<PedidoEntity> pedidos = List.of(pedido1, pedido2);

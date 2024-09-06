@@ -3,7 +3,6 @@ package com.fiap.mspedidoapi.infra.adpter.repository.pedido;
 import com.fiap.mspedidoapi.domain.entity.pedido.PedidoEntity;
 import com.fiap.mspedidoapi.domain.entity.pedido.ProdutoEntity;
 import com.fiap.mspedidoapi.domain.gateway.pedido.BuscaListaPedidoInterface;
-import com.fiap.mspedidoapi.infra.collection.pedido.Pedido;
 import com.fiap.mspedidoapi.infra.collection.pedido.items.Produto;
 import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +40,7 @@ public class BuscarListaPedidoRepository implements BuscaListaPedidoInterface {
                     pedidoCollection.getClienteUuid(),
                     pedidoCollection.getStatusPedido(),
                     pedidoCollection.getStatusPagamento(),
+                    pedidoCollection.getTempoDePreparo(),
                     pedidoCollection.getTotal()
             );
 

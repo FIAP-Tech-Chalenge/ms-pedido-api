@@ -28,6 +28,8 @@ public class Pedido {
     private StatusPedido statusPedido;
     @Field("status_pagamento")
     private StatusPagamento statusPagamento;
+    @Field("tempo_preparo")
+    private int tempoDePreparo;
     private Float total;
     private List<Produto> produtos;
 }

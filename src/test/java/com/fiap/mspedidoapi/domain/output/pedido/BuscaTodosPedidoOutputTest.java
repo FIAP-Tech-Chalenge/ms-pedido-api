@@ -18,8 +18,8 @@ public class BuscaTodosPedidoOutputTest {
 
     @BeforeEach
     public void setUp() {
-        PedidoEntity pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 100.0f);
-        PedidoEntity pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 200.0f);
+        PedidoEntity pedido1 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 20, 100.0f);
+        PedidoEntity pedido2 = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 20, 200.0f);
         pedidos = List.of(pedido1, pedido2);
         outputStatus = new OutputStatus(200, "SUCCESS", "Operação realizada com sucesso");
         buscaTodosPedidoOutput = new BuscaTodosPedidoOutput(pedidos, outputStatus);
@@ -45,7 +45,7 @@ public class BuscaTodosPedidoOutputTest {
 
     @Test
     public void devePermitirAtualizarListPedidos() {
-        PedidoEntity novoPedido = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 300.0f);
+        PedidoEntity novoPedido = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null,20, 300.0f);
         List<PedidoEntity> novosPedidos = List.of(novoPedido);
         buscaTodosPedidoOutput.setListPedidos(novosPedidos);
 
@@ -96,7 +96,7 @@ public class BuscaTodosPedidoOutputTest {
 
     @Test
     public void equalsDeveRetornarFalseParaListPedidosDiferentes() {
-        PedidoEntity pedidoDiferente = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 300.0f);
+        PedidoEntity pedidoDiferente = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 20, 300.0f);
         List<PedidoEntity> pedidosDiferentes = List.of(pedidoDiferente);
         BuscaTodosPedidoOutput outputDiferente = new BuscaTodosPedidoOutput(pedidosDiferentes, outputStatus);
         assertThat(buscaTodosPedidoOutput).isNotEqualTo(outputDiferente);
@@ -144,7 +144,7 @@ public class BuscaTodosPedidoOutputTest {
 
     @Test
     public void hashCodeDeveSerDiferenteParaObjetosDiferentes() {
-        PedidoEntity pedidoDiferente = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 300.0f);
+        PedidoEntity pedidoDiferente = new PedidoEntity(UUID.randomUUID(), UUID.randomUUID(), null, null, 20, 300.0f);
         List<PedidoEntity> pedidosDiferentes = List.of(pedidoDiferente);
         BuscaTodosPedidoOutput outputDiferente = new BuscaTodosPedidoOutput(pedidosDiferentes, outputStatus);
         assertThat(buscaTodosPedidoOutput.hashCode()).isNotEqualTo(outputDiferente.hashCode());
