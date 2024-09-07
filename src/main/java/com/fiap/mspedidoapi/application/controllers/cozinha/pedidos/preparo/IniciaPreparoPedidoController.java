@@ -4,7 +4,8 @@ import com.fiap.mspedidoapi.application.controllers.cozinha.pedidos.preparo.requ
 import com.fiap.mspedidoapi.application.response.GenericResponse;
 import com.fiap.mspedidoapi.application.response.PresenterResponse;
 import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
-import com.fiap.mspedidoapi.domain.output.pedido.PedidoProntoOutput;
+import com.fiap.mspedidoapi.domain.output.pedido.PedidoEmPreparacaoOutput;
+import com.fiap.mspedidoapi.domain.presenters.pedido.PedidoEmPreparoPresenter;
 import com.fiap.mspedidoapi.domain.presenters.pedido.PedidoProntoPresenter;
 import com.fiap.mspedidoapi.domain.useCase.pedido.IniciaPreparoPedidoUseCase;
 import com.fiap.mspedidoapi.infra.adpter.repository.pedido.PreparaPedidoRepository;
@@ -40,7 +41,7 @@ public class IniciaPreparoPedidoController {
             return new GenericResponse().response(outputInterface);
         }
 
-        PedidoProntoPresenter presenter = new PedidoProntoPresenter((PedidoProntoOutput) outputInterface);
+        PedidoEmPreparoPresenter presenter = new PedidoEmPreparoPresenter((PedidoEmPreparacaoOutput) outputInterface);
         return new PresenterResponse().response(presenter);
     }
 }
