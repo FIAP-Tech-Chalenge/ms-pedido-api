@@ -13,7 +13,7 @@ public class PreparaPedidoProducer extends KafkaSenderConfig implements PreparaP
     private final ObjectMapper objectMapper = new ObjectMapper();   
 
     public PreparaPedidoProducer(String servers) {
-        super(servers, new KafkaProducerResolver().getPedidoProducer());
+        super(servers, new KafkaProducerResolver().getTempoDeEsperaProducer());
     }
 
     @Override
