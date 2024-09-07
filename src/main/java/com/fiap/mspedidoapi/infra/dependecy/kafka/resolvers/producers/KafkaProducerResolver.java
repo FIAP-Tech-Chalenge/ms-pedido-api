@@ -10,4 +10,7 @@ public class KafkaProducerResolver {
     public String getPedidoProducer() {
         return KafkaTopicsEnum.pedido.name();
     }
+    public String getTempoDeEsperaProducer() {
+        return KafkaTopicsEnum.tempo_de_espera.name();
+    }
 }
