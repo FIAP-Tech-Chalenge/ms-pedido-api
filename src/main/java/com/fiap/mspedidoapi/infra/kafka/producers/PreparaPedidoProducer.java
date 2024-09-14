@@ -6,11 +6,14 @@ import com.fiap.mspedidoapi.domain.gateway.producers.PreparaPedidoProducerInterf
 import com.fiap.mspedidoapi.domain.output.pedido.PedidoEmPreparacaoOutput;
 import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.producers.KafkaProducerResolver;
 import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.producers.KafkaSenderConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
 public class PreparaPedidoProducer extends KafkaSenderConfig implements PreparaPedidoProducerInterface {
-    private final ObjectMapper objectMapper = new ObjectMapper();   
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Logger logger = LoggerFactory.getLogger(PreparaPedidoProducer.class);
 
     public PreparaPedidoProducer(String servers) {
         super(servers, new KafkaProducerResolver().getTempoDeEsperaProducer());
@@ -26,9 +29,13 @@ public class PreparaPedidoProducer extends KafkaSenderConfig implements PreparaP
             jsonNode.put("tempo_preparo", pedidoEmPreparacaoOutput.getPedido().getTempoDePreparoEmMinutos());
             String json = jsonNode.toString();
             send(UUID.randomUUID().toString(), json);
+            logger.info("Mensagem enviada - UUID Pedido: {}, Status Pedido: {}, Número Pedido: {}, Tempo Preparo: {}",
+                    pedidoEmPreparacaoOutput.getPedido().getPedidoId(),
+                    pedidoEmPreparacaoOutput.getPedido().getStatusPedido(),
+                    pedidoEmPreparacaoOutput.getPedido().getNumeroPedido(),
+                    pedidoEmPreparacaoOutput.getPedido().getTempoDePreparoEmMinutos());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Erro ao enviar a mensagem: ", e);
         }
     }
-    
 }

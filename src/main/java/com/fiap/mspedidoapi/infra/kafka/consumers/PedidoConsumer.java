@@ -7,10 +7,13 @@ import com.fiap.mspedidoapi.domain.enums.pedido.StatusPagamento;
 import com.fiap.mspedidoapi.domain.enums.pedido.StatusPedido;
 import com.fiap.mspedidoapi.infra.collection.pedido.items.Produto;
 import com.fiap.mspedidoapi.infra.dependecy.kafka.resolvers.consumers.KafkaConsumerResolver;
+import com.fiap.mspedidoapi.infra.kafka.producers.PreparaPedidoProducer;
 import com.fiap.mspedidoapi.infra.repository.PedidosMongoRepository;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -23,6 +26,7 @@ public class PedidoConsumer {
     private final KafkaConsumer<String, String> consumer;
     private final ObjectMapper objectMapper;
     private final PedidosMongoRepository pedidoRepository;
+    private final Logger logger = LoggerFactory.getLogger(PreparaPedidoProducer.class);
 
     public PedidoConsumer(
             Properties kafkaConsumerProperties,
@@ -39,7 +43,7 @@ public class PedidoConsumer {
             while (!Thread.currentThread().isInterrupted()) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> record : records) {
-                    System.out.printf("Mensagem recebida - Tópico: %s, Chave: %s, Valor: %s%n", record.topic(), record.key(), record.value());
+                    logger.info("Mensagem recebida - Tópico: %s, Chave: %s, Valor: %s%n", record.topic(), record.key(), record.value());
                     try {
                         JsonNode messageJson = objectMapper.readTree(record.value());
                         String uuidPedido = messageJson.get("pedido_uuid").asText();
@@ -81,13 +85,13 @@ public class PedidoConsumer {
                         pedidoRepository.save(pedidoModel);
 
                     } catch (Exception e) {
-                        System.err.println("Erro ao processar a mensagem: " + e.getMessage());
+                        logger.error("Erro ao processar a mensagem: " + e.getMessage());
                     }
                 }
             }
         } finally {
             this.consumer.close();
-            System.out.println("Consumidor Kafka fechado.");
+            logger.info("Consumidor Kafka fechado.");
         }
     }
 }

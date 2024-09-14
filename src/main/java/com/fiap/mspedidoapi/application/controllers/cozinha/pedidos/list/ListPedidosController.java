@@ -22,7 +22,7 @@ public class ListPedidosController {
     private final PedidosMongoRepository pedidosMongoRepository;
 
     @GetMapping("/lista-pedido/")
-    @Operation(tags = {"cozinha"})
+    @Operation(summary = "Listar todos pedidos", tags = {"cozinha"})
     public ResponseEntity<Object> getAllListaPedidos() {
         //injetar repository do que consulta o MONGODB
         BuscaListaPedidosUseCase useCase = new BuscaListaPedidosUseCase(new BuscarListaPedidoRepository(pedidosMongoRepository));

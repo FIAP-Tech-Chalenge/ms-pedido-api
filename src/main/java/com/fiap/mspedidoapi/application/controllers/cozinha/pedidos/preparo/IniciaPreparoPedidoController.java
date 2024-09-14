@@ -6,7 +6,6 @@ import com.fiap.mspedidoapi.application.response.PresenterResponse;
 import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
 import com.fiap.mspedidoapi.domain.output.pedido.PedidoEmPreparacaoOutput;
 import com.fiap.mspedidoapi.domain.presenters.pedido.PedidoEmPreparoPresenter;
-import com.fiap.mspedidoapi.domain.presenters.pedido.PedidoProntoPresenter;
 import com.fiap.mspedidoapi.domain.useCase.pedido.IniciaPreparoPedidoUseCase;
 import com.fiap.mspedidoapi.infra.adpter.repository.pedido.PreparaPedidoRepository;
 import com.fiap.mspedidoapi.infra.kafka.producers.PreparaPedidoProducer;
@@ -15,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,8 @@ public class IniciaPreparoPedidoController {
     private String servers;
 
     @PostMapping("/inicia-preparo")
-    @Operation(tags = {"cozinha"})
+    @Operation(summary = "Iniciar preparo de pedido", tags = {"cozinha"})
+    @Transactional
     public ResponseEntity<Object> iniciaPreparoPedido(@RequestBody StoreIniciaPreparoProdutoRequest iniciaPreparoProdutoRequest) {
         IniciaPreparoPedidoUseCase useCase = new IniciaPreparoPedidoUseCase(
             new PreparaPedidoRepository(pedidosMongoRepository),
