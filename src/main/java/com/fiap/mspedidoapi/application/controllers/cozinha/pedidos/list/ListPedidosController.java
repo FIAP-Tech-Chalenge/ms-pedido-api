@@ -24,7 +24,6 @@ public class ListPedidosController {
     @GetMapping("/lista-pedido/")
     @Operation(summary = "Listar todos pedidos", tags = {"cozinha"})
     public ResponseEntity<Object> getAllListaPedidos() {
-        //injetar repository do que consulta o MONGODB
         BuscaListaPedidosUseCase useCase = new BuscaListaPedidosUseCase(new BuscarListaPedidoRepository(pedidosMongoRepository));
         useCase.execute();
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();

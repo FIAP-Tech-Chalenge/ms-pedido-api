@@ -9,6 +9,7 @@ import com.fiap.mspedidoapi.domain.generic.output.OutputInterface;
 import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
 import com.fiap.mspedidoapi.domain.output.pedido.PedidoProntoOutput;
 import lombok.Getter;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class PedidoProntoUseCase {
         this.pedidoProntoProducerInterface = pedidoProntoProducerInterface;
     }
 
+    @Transactional
     public void execute(UUID uuidPedido) {
         try {
             Entrega entrega = entregaInterface.atualizaStatusPedido(uuidPedido);

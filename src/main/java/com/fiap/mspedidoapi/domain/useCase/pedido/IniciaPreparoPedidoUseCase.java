@@ -11,6 +11,9 @@ import com.fiap.mspedidoapi.domain.generic.output.OutputStatus;
 import com.fiap.mspedidoapi.domain.output.pedido.PedidoEmPreparacaoOutput;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -21,7 +24,9 @@ public class IniciaPreparoPedidoUseCase {
     private final PreparaPedidoInterface preparaPedidoInterface;
     private final PreparaPedidoProducerInterface preparaPedidoProducerInterface;
     private OutputInterface outputInterface;
+    private final Logger logger = LoggerFactory.getLogger(IniciaPreparoPedidoUseCase.class);
 
+    @Transactional
     public void execute(UUID pedidoUUID, Integer tempoDePreparoEmMinutos) {
         try {
 
@@ -50,7 +55,7 @@ public class IniciaPreparoPedidoUseCase {
             );
 
         }catch (PedidoNaoEncontradoException e) {
-            System.out.println("Pedido nao enconstrado");
+            logger.error("Pedido nao enconstrado");
             this.outputInterface = new OutputError(
                     e.getMessage(),
                     new OutputStatus(404, "Not found", "Pedido não encontrado")

@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,6 @@ public class PedidoProntoController {
 
     @PostMapping("/{pedidoUuid}")
     @Operation(summary = "Atualizar pedidos", tags = {"cozinha"})
-    @Transactional
     public ResponseEntity<Object> atualizaPedido(@PathVariable UUID pedidoUuid) {
         PedidoProntoUseCase useCase = new PedidoProntoUseCase(
                 new PedidoProntoRepository(pedidosMongoRepository),

@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,6 @@ public class IniciaPreparoPedidoController {
 
     @PostMapping("/inicia-preparo")
     @Operation(summary = "Iniciar preparo de pedido", tags = {"cozinha"})
-    @Transactional
     public ResponseEntity<Object> iniciaPreparoPedido(@RequestBody StoreIniciaPreparoProdutoRequest iniciaPreparoProdutoRequest) {
         IniciaPreparoPedidoUseCase useCase = new IniciaPreparoPedidoUseCase(
             new PreparaPedidoRepository(pedidosMongoRepository),
